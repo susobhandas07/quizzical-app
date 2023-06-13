@@ -43,7 +43,7 @@ export default function main(props) {
         <div className='question--container'>
             {questionElements}
             <section className='result'>
-                <p id='result' className='hidden'>You have scored {count}/5 correct answers</p>
+                <p id='result' className='hidden'>You have scored {count}/{props.data.length} correct answers</p>
                 <button type='button' onClick={() => window.location.reload()} className='showResult hidden' id='reload'>Re-Try</button>
                 <button type='button' onClick={(event) => checkAnswers(event)} className='showResult'>Check</button>
             </section>

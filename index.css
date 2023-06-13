@@ -6,7 +6,6 @@
 
 * {
     box-sizing: border-box;
-    /* background-color: hsla(147,50%,47%,0.4); */
 }
 
 html,
@@ -36,6 +35,11 @@ body {
 
 main {
     font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    ;
 }
 
 .box {
@@ -44,6 +48,23 @@ main {
     color: #293264;
     font-size: 1.2em;
 }
+
+.choices {
+    border: none;
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    z-index: 0
+}
+
+.drop-down {
+    text-align: center;
+    background-color: rgba(47, 40, 40, 0.2);
+    border: none;
+}
+
 
 #start--btn {
     font-size: 1.5em;
@@ -57,6 +78,8 @@ main {
     background-color: #4D5B9E;
     color: white;
     cursor: pointer;
+    z-index: 1;
+    position: relative;
 }
 
 .question--container {
@@ -68,6 +91,7 @@ main {
     margin-top: 1.4rem;
     display: flex;
     justify-content: space-around;
+    gap: 0.2rem;
 }
 
 .container legend {
@@ -92,7 +116,9 @@ input[type='radio']:checked+label {
     padding-bottom: 0.2rem;
 }
 
-.container label:hover {
+.container label:hover,
+.showResult:hover,
+.drop-down:hover {
     cursor: pointer;
 }
 
@@ -139,15 +165,16 @@ input[type='radio']:checked+label {
         width: 35vw;
     }
 
-    main {
-        height: 100vh;
-        align-items: center;
-        display: flex;
-        justify-content: center;
-    }
-
     .box {
         max-width: 550px;
+    }
+
+    .choices {
+        font-size: 0.8em;
+    }
+
+    .drop-down {
+        margin-inline: 1rem;
     }
 
     .question--container {
@@ -162,9 +189,6 @@ input[type='radio']:checked+label {
         margin-bottom: 0.3rem;
     }
 
-    .showResult:hover {
-        cursor: pointer;
-    }
 }
 
 @media(max-width:768px) {
@@ -172,9 +196,6 @@ input[type='radio']:checked+label {
         width: 35vh;
     }
 
-    .container {
-        flex-direction: column;
-    }
 
     .box {
         display: flex;
@@ -183,6 +204,20 @@ input[type='radio']:checked+label {
         justify-content: center;
         height: 100vh;
         width: 100%;
+    }
+
+    .choices {
+        justify-content: space-around;
+        height: fit-content;
+        gap: 2rem;
+        top: 2rem;
+    }
+
+
+    .drop-down {
+        display: block;
+        width: 100%;
+        margin-inline: auto;
     }
 
     .result {

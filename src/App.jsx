@@ -2,16 +2,26 @@ import React from 'react';
 import { nanoid } from 'nanoid';
 import Intro from './intro';
 import Questions from './questions';
+import './assets/spin-load-an.css';
 
 export default function main() {
     let [startQuize, setStartQuize] = React.useState(false), qlist;
-    let [questionsLoaded, setQuestionsLoaded] = React.useState(false);
-    function loadQuestions() {
-        setStartQuize(true);
-    }
+
+    let [length, setLength] = React.useState(5), [subject, setSubject] = React.useState('any');
+
     let [questionSet, setQuestionSet] = React.useState([]);
-    React.useEffect(() => {
-        fetch('https://opentdb.com/api.php?amount=5&type=multiple')
+
+    //fetchs questions from the api and sets startQuize to TRUE
+    function loadQuestions(event) {
+        //change the start button to an loading icon
+        let element = event.target, parent = element.parentNode;
+        const child = document.createElement('div');
+        child.setAttribute('class', 'element');
+        parent.removeChild(element);
+        parent.appendChild(child);
+
+        //api fetch
+        fetch(`https://opentdb.com/api.php?amount=${length}${subject !== 'any' ? `&${subject}` : ""}&type=multiple`)
             .then(res => res.json())
             .then(data => {
                 let questionset = data.results.map((value) => {
@@ -29,12 +39,19 @@ export default function main() {
                     }
                 });
                 setQuestionSet(questionset);
-                setQuestionsLoaded(true);
-            });
-    }, []);
+                setStartQuize(true);
+            })
+    }
+
+    //function to change number of questions and subject of quize
+    const handleChange = (event) => {
+        let { name, value } = event.target;
+        if (name === 'length') setLength(value);
+        else if (name === 'subject') setSubject(value);
+    };
     return (
-        <div id='appDiv'>
-            {questionsLoaded && (startQuize ? <Questions data={questionSet} /> : <Intro loadQuestion={loadQuestions} />)}
-        </div>
+        <>
+            {startQuize ? <Questions data={questionSet} /> : <Intro loadQuestion={loadQuestions} handleChange={handleChange} length={length} subject={subject} />}
+        </>
     );
 }
