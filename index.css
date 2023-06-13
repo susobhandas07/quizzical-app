@@ -220,6 +220,10 @@ input[type='radio']:checked+label {
         margin-inline: auto;
     }
 
+    .question {
+        flex-direction: column;
+    }
+
     .result {
         flex-direction: column;
         text-align: center;

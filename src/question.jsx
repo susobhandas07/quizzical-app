@@ -1,7 +1,7 @@
 import React from 'react';
 export default function main(props) {
     return (
-        <fieldset className='container'>
+        <fieldset className='container question'>
             <legend dangerouslySetInnerHTML={{ __html: props.question }} />
             <input checked={props.marked === props.answers[0]} onChange={(event) => props.handeler(event, props.id)} type='radio' id={props.answers[0]} name={props.question} value={props.answers[0]} />
             <label className={props.id} htmlFor={props.answers[0]} dangerouslySetInnerHTML={{ __html: props.answers[0] }} />
