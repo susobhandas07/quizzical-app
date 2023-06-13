@@ -21,7 +21,7 @@ export default function main() {
         parent.appendChild(child);
 
         //api fetch
-        fetch(`https://opentdb.com/api.php?amount=${length}${subject !== 'any' ? `&${subject}` : ""}&type=multiple`)
+        fetch(`https://opentdb.com/api.php?amount=${length}${subject !== 'any' ? `&caegory=${subject}` : ""}&type=multiple`)
             .then(res => res.json())
             .then(data => {
                 let questionset = data.results.map((value) => {
