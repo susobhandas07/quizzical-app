@@ -84,7 +84,7 @@ main {
 
 .question--container {
     padding-bottom: 0.5rem;
-    width: 100%;
+    max-width: 100%;
 }
 
 .container {
